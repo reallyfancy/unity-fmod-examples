@@ -6,7 +6,8 @@ using FMODUnity;
 
 // Instructions for use:
 // 1. Place this script on the same GameObject as the StudioEventEmitter that you want to update
-// 2. When you enter Play Mode, the chosen parameter of the StudioEventEmitter will increase each time you press the space bar
+// 3. Type the name of the parameter that you want to update in the "Parameter Name" field in the Inspector panel
+// 3. When you enter Play Mode, the chosen parameter of the StudioEventEmitter will increase each time you press the space bar
 
 public class UpdateEventParameterWithKeyPresses : MonoBehaviour 
 {

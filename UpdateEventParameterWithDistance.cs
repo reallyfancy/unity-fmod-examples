@@ -2,18 +2,22 @@
 using FMODUnity;
 
 // This is a simple example of how to update a parameter of your FMOD event using scripting.
-// In this example, we set the value of a parameter to the current world y position of another GameObject.
+// In this example, we sends the distance between two GameObjects as a parameter to a StudioEventEmitter.
 
 // Instructions for use:
 // 1. Place this script on the same GameObject as the StudioEventEmitter that you want to update
-// 2. Drag a GameObject into the "other" field in the Inspector panel
+// 2. Drag a GameObject into the "Object One" field in the Inspector panel
+// 3. Drag a different GameObject into the "Object Two" field in the Inspector panel
 // 3. Type the name of the parameter that you want to update in the "Parameter Name" field in the Inspector panel
-// 4. When you enter Play Mode, the chosen parameter of the StudioEventEmitter will be set to the chosen GameObject's world y position. Try changing the GameObject's world y position to see what happens.
+// 4. When you enter Play Mode, the chosen parameter of the StudioEventEmitter will be set to the distance between the two chosen GameObjects.
 
-public class UpdateEventParameterWithDataFromOtherGameObject : MonoBehaviour 
+public class UpdateEventParameterWithDistance : MonoBehaviour 
 {
-	// This line creates a field in the Inspector panel where you can drag the GameObject that you want to get your data from
-	public GameObject other;	
+	// This line creates a field in the Inspector panel where you can drag one of the GameObject that you want to measure the distance between
+	public Transform objectOne;						
+
+	// This line creates a field in the Inspector panel where you can drag the other GameObject that you want to measure the distance between
+	public Transform objectTwo;						
 
 	// This line creates a field in the Inspector panel where you can type the name of the parameter you want to update
 	public string parameterName;
@@ -33,11 +37,10 @@ public class UpdateEventParameterWithDataFromOtherGameObject : MonoBehaviour
 		eventEmitter = GetComponent<StudioEventEmitter>();
 	}
 
-	// Update is called once per frame
-	void Update ()
+	void Update () 
 	{
-		// Get the data we want from the other GameObject - in this example, its current y position in the world
-		float newValue = other.transform.position.y;
+		// Calculate the distance between the two specified objects
+		float newValue = Vector3.Distance(objectOne.position, objectTwo.position);
 
 		// If the parameter has never been updated OR the new parameter value has changed since the last frame...
 		if(!hasParameterEverBeenUpdated || newValue != previousParameterValue)
